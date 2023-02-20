@@ -16,7 +16,9 @@ function onDeviceReady() {
   const pizzasPage = document.querySelector("#pizzas-page");
   pizzasNav.root = pizzasPage;
 
-
+/**
+ * créer une alert et renvoie les données via une fontion callback au click sur le bouton "créer"
+ */
   async function presentAlert() {
     const alert = document.createElement("ion-alert");
     alert.header = "Renseignez les données de la pizza";
@@ -40,6 +42,10 @@ function onDeviceReady() {
     
   }
 
+  /**
+   * créer un affichage pour une pizza à partir des resultats de l'alert
+   * @param {object} pizzaObject 
+   */
   function createPizza(pizzaObject) {
     const ionItem = document.createElement("ion-item");
     ionItem.innerHTML = `
