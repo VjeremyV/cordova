@@ -18,9 +18,10 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <!--
+
+<head>
+    <meta charset="utf-8">
+    <!--
         Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
             https://cordova.apache.org/docs/en/latest/
         Some notes:
@@ -28,47 +29,75 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        
-        <div class="add-pizza-form">
-            <h2>Ajouter une pizza</h2>
-            <form action="" id="add-pizza">
-          <div class="inputContainer">
-                  <label for="nomPizza">Nom de la pizza</label>
-                  <input type="text" name="nomPizza" id="nomPizza">
-          </div>
-          <div class="inputContainer">
-                  <label for="ingredients">Ingrédients</label>
-                  <input type="text" name="ingredients" id="ingredients">
-          </div>
-          <input type="submit" value="Ajouter">
-            </form>
-        </div>
-        <div id="errorContainer"></div>
-        <div class="pizzas">
-            <div class="pizza">
-                <p>Fromages</p>
-                <p>(emental, jambon, olive, tomates)</p>
-            </div>
-            <div class="pizza">
-                <p>Chèvre</p>
-                <p>(emental, chèvre, tomates, olives)</p>
-            </div>
-            <div class="pizza">
-                <p>Cannibale</p>
-                <p>(emental, viande hachée, tomates, oignons)</p>
-            </div>
-        </div>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
 
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+
+    <link rel="stylesheet" href="css/index.css">
+    <title>Pizzerias Cordova</title>
+</head>
+
+<body>
+    <ion-app>
+        <ion-header>
+            <h1>Menu Pizzas</h1>
+        </ion-header>
+        <ion-content>
+            <ion-item class="h2">
+                <h2>Ajouter une pizza</h2>
+            </ion-item>
+                <form action="" id="add-pizza">
+                    <ion-item>
+                        <ion-label position="floating">Nom de la pizza</ion-label>
+                        <ion-input name="nomPizza" id="nomPizza" placeholder="Ecrivez ici"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Ingrédients</ion-label>
+                        <ion-input name="ingredients" id="ingredients" placeholder="Ecrivez ici"></ion-input>
+                    </ion-item>
+                    <ion-button id="submit-btn"type="submit">Ajouter</ion-button>
+                </form>
+                <ion-list lines="none">
+                    <ion-item >
+                        <ion-label id="errorContainer"></ion-label>
+                    </ion-item>
+                </ion-list no-lines>
+            <ion-item class="h2 sndTitle">
+                <h2>Pizzas disponibles</h2>
+            </ion-item>
+            <ion-list class="pizzas">
+                <ion-item>
+                    <ion-label>
+                        <h2>Fromages</h2>
+                        <p>(emental, jambon, olive, tomates)</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item>
+
+                    <ion-label>
+                        <h2>Chèvre</h2>
+                        <p>(emental, chèvre, tomates, olives)</p>
+                    </ion-label>
+
+                </ion-item>
+                <ion-item>
+
+                    <ion-label>
+                        <h2>Cannibale</h2>
+                        <p>(emental, viande hachée, tomates, oignons)</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-app>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
 </html>
