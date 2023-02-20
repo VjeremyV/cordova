@@ -1,34 +1,55 @@
-document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("deviceready", onDeviceReady);
 
 function onDeviceReady() {
-  // Cordova is now initialized. Have fun!
-  let addForm = document.getElementById("add-pizza");
-  let pizzaList = document.querySelector(".pizzas");
-  let addName = document.getElementById("nomPizza");
-  let addIngredients = document.getElementById("ingredients");
+  const pizzasTag = document.querySelector("#pizzas-list");
+  const btCreatePizza = document.querySelector("#bt-create-pizza");
 
-  addForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (isValid(addName.value) && isValid(addIngredients.value)) {
-      let newPizza = document.createElement("div");
-      newPizza.classList.add("pizza");
-      newPizza.innerHTML = `
-        <ion-item>
-            <ion-label>
-                <h2>${capitalizeFisrtLetter(addName.value)}</h2>
-                <p>${formatIngredients(addIngredients.value)}</p>
-            </ion-label>
-        </ion-item>`;
-
-      pizzaList.appendChild(newPizza);
-      resetInput(addName);
-      resetInput(addIngredients);
-    } else {
-      let errorContainer = document.getElementById("errorContainer");
-      errorContainer.textContent = "la saisie n'est pas valide";
-      setTimeout(() => (errorContainer.textContent = ""), 2000);
-    }
+  btCreatePizza.addEventListener("click", () => {
+    presentAlert();
   });
+
+  const homeNav = document.querySelector("#home-nav");
+  const homePage = document.querySelector("#home-page");
+  homeNav.root = homePage;
+
+  const pizzasNav = document.querySelector("#pizzas-nav");
+  const pizzasPage = document.querySelector("#pizzas-page");
+  pizzasNav.root = pizzasPage;
+
+
+  async function presentAlert() {
+    const alert = document.createElement("ion-alert");
+    alert.header = "Renseignez les données de la pizza";
+    alert.buttons = [{
+        text: 'Créer',
+        handler: (value) => { createPizza(value)}
+    }];
+    alert.inputs = [
+      {
+        name: "nom",
+        placeholder: "Nom",
+      },
+      {
+        name: "ingredients",
+        placeholder: "Ingrédients",
+      },
+    ];
+
+    document.body.appendChild(alert);
+    await alert.present();
+    
+  }
+
+  function createPizza(pizzaObject) {
+    const ionItem = document.createElement("ion-item");
+    ionItem.innerHTML = `
+    <ion-label>
+    <h1>${capitalizeFisrtLetter(pizzaObject.nom)}</h1>
+    <h3>${formatIngredients(pizzaObject.ingredients)}</h3>
+    </ion-label>
+    `;
+    pizzasTag.insertBefore(ionItem, pizzasTag.firstElementChild);
+  }
 
   function resetInput(input) {
     input.value = "";
