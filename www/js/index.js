@@ -1,13 +1,7 @@
-// document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 
-// function onDeviceReady() {
-//     // Cordova is now initialized. Have fun!
-
-//     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-//     document.getElementById('deviceready').classList.add('ready');
-// }
-
-(()=> {
+function onDeviceReady() {
+    // Cordova is now initialized. Have fun!
     let addForm = document.getElementById("add-pizza");
     let pizzaList = document.querySelector(".pizzas");
     let addName = document.getElementById("nomPizza");
@@ -25,5 +19,5 @@
   
       pizzaList.appendChild(newPizza);
     });
-})()
+}
 
