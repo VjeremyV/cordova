@@ -13,11 +13,22 @@ function onDeviceReady() {
       newPizza.classList.add('pizza');
       newPizza.innerHTML = `
               <div class="pizza">
-                  <p>${addName.value}</p>
-                  <p>${addIngredients.value}</p>
+                  <p>${capitalizeFisrtLetter(addName.value)}</p>
+                  <p>${formatIngredients(addIngredients.value)}</p>
               </div>`;
   
       pizzaList.appendChild(newPizza);
     });
+
+    function isValid(value) {
+        return value && value.lenght > 2 && value.lenght < 50;
+    }
+
+    function formatIngredients(value){
+        return "("+ value.replaceAll(" ", ", ")+")"
+    }
+    function capitalizeFisrtLetter(value){
+        return value.slice(0, 1).toUpperCase() + value.slice(1);
+    }
 }
 

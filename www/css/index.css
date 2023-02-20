@@ -22,3 +22,17 @@ body > * {
     border: 1px solid black;
     border-radius: 10px;
 }
+.add-pizza-form input[type=submit]{
+    border-radius: 5px;
+    color: aliceblue;
+    background: blue;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.7s ease;
+}
+.add-pizza-form input[type=submit]:hover{
+    color: blue;
+    background: aliceblue;
+    border: 1px solid blue;
+}
