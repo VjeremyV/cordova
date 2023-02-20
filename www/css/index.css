@@ -16,3 +16,9 @@ body > * {
     align-items: center;
     margin: 5px;
 }
+
+.add-pizza-form{
+    padding: 15px 25px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
