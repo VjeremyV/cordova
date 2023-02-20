@@ -36,3 +36,9 @@ body > * {
     background: aliceblue;
     border: 1px solid blue;
 }
+
+#errorContainer{
+    color : red;
+    background: aliceblue;
+    border-radius: 5px;
+}
