@@ -19,7 +19,7 @@ function onDeviceReady() {
 /**
  * créer une alert et renvoie les données via une fontion callback au click sur le bouton "créer"
  */
-  async function presentAlert(nom = null) {
+  async function presentAlert(nom = null, base=null) {
     const alert = document.createElement("ion-alert");
     if(!nom){
       alert.header = "Renseignez les données de la pizza";
@@ -36,12 +36,35 @@ function onDeviceReady() {
      
       ];
     } else {
-      alert.header = "Renseignez les ingrédients";
-      alert.buttons = [{
-          text: 'Envoyer',
-          handler: (value) => { createPizza(nom, value)}
-      }];
-      alert.inputs = createInput();
+      if(!base){
+        alert.header = "Choisissez votre base";
+        alert.buttons = [{
+            text: 'Créer',
+            handler: (value) => { presentAlert(nom, value)}
+        }];
+        alert.inputs = [
+          {
+            type: 'radio',
+            label : "base tomate",
+            value : "base tomate",
+            name : "base tomate"
+          },
+          {
+            type: 'radio',
+            label : "base creme",
+            value : "base creme",
+            name : "base creme"
+          },
+       
+        ];
+      } else {
+        alert.header = "Renseignez les ingrédients";
+        alert.buttons = [{
+            text: 'Envoyer',
+            handler: (value) => { createPizza(nom, base , value)}
+        }];
+        alert.inputs = createInput();
+      }
     }
   
 
@@ -54,14 +77,15 @@ function onDeviceReady() {
    * créer un affichage pour une pizza à partir des resultats de l'alert
    * @param {object} pizzaObject 
    */
-  function createPizza(name, ingredients) {
-    console.log(name)
+  function createPizza(name, base, ingredients) {
+    console.log(base)
     console.log(ingredients)
     ingredients = ingredients.join(" ")
     const ionItem = document.createElement("ion-item");
     ionItem.innerHTML = `
     <ion-label>
     <h1>${capitalizeFisrtLetter(name)}</h1>
+    <h3>${capitalizeFisrtLetter(base)}</h3>
     <h3>${formatIngredients(ingredients)}</h3>
 
     </ion-label>
@@ -69,6 +93,10 @@ function onDeviceReady() {
     pizzasTag.insertBefore(ionItem, pizzasTag.firstElementChild);
   }
 
+  /**
+   * créer le tableau d'inputs en fonction de la valeur de la constante ingrédients pour libérer du code
+   * @returns {array}
+   */
   function createInput() {
     let inputs = [];
     ingredients.forEach((element)=>{
