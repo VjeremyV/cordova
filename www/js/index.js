@@ -19,23 +19,51 @@ function onDeviceReady() {
 /**
  * créer une alert et renvoie les données via une fontion callback au click sur le bouton "créer"
  */
-  async function presentAlert() {
+  async function presentAlert(nom = null) {
     const alert = document.createElement("ion-alert");
-    alert.header = "Renseignez les données de la pizza";
-    alert.buttons = [{
-        text: 'Créer',
-        handler: (value) => { createPizza(value)}
-    }];
-    alert.inputs = [
-      {
-        name: "nom",
-        placeholder: "Nom",
-      },
-      {
-        name: "ingredients",
-        placeholder: "Ingrédients",
-      },
-    ];
+    if(!nom){
+      alert.header = "Renseignez les données de la pizza";
+      alert.buttons = [{
+          text: 'Créer',
+          handler: ({nom}) => { presentAlert(nom)}
+      }];
+      alert.inputs = [
+        {
+          type: 'text',
+          placeholder : "Nom de la pizza",
+          name : "nom"
+        },
+     
+      ];
+    } else {
+      alert.header = "Renseignez les ingrédients";
+      alert.buttons = [{
+          text: 'Créer',
+          handler: (value) => { createPizza(nom, value)}
+      }];
+      alert.inputs = [
+        {
+          type: 'checkbox',
+          label : "fromage",
+          name : "fromage",
+          value : "fromage"
+        },
+        {
+          type: 'checkbox',
+          label : "tomate",
+          name : "tomate",
+          value : "tomate"
+        },
+        {
+          type: 'checkbox',
+          label : "oignons",
+          name : "oignons",
+          value : "oignons"
+        },
+     
+      ];
+    }
+  
 
     document.body.appendChild(alert);
     await alert.present();
@@ -46,12 +74,16 @@ function onDeviceReady() {
    * créer un affichage pour une pizza à partir des resultats de l'alert
    * @param {object} pizzaObject 
    */
-  function createPizza(pizzaObject) {
+  function createPizza(name, ingredients) {
+    console.log(name)
+    console.log(ingredients)
+    ingredients = ingredients.join(" ")
     const ionItem = document.createElement("ion-item");
     ionItem.innerHTML = `
     <ion-label>
-    <h1>${capitalizeFisrtLetter(pizzaObject.nom)}</h1>
-    <h3>${formatIngredients(pizzaObject.ingredients)}</h3>
+    <h1>${capitalizeFisrtLetter(name)}</h1>
+    <h3>${formatIngredients(ingredients)}</h3>
+
     </ion-label>
     `;
     pizzasTag.insertBefore(ionItem, pizzasTag.firstElementChild);
