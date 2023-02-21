@@ -3,7 +3,9 @@ document.addEventListener("deviceready", onDeviceReady);
 function onDeviceReady() {
   const pizzasTag = document.querySelector("#pizzas-list");
   const btCreatePizza = document.querySelector("#bt-create-pizza");
-  const ingredients = ['fromage', "tomate","oignons","poulet","origan","oeuf","jambon"]
+  const ingredients = ['fromage', "tomate","oignons","poulet","origan","oeuf","jambon"];
+  const bases = ['base tomate', "base creme"];
+
   btCreatePizza.addEventListener("click", () => {
     presentAlert();
   });
@@ -42,28 +44,14 @@ function onDeviceReady() {
             text: 'Créer',
             handler: (value) => { presentAlert(nom, value)}
         }];
-        alert.inputs = [
-          {
-            type: 'radio',
-            label : "base tomate",
-            value : "base tomate",
-            name : "base tomate"
-          },
-          {
-            type: 'radio',
-            label : "base creme",
-            value : "base creme",
-            name : "base creme"
-          },
-       
-        ];
+        alert.inputs = createInput(bases, 'radio');
       } else {
         alert.header = "Renseignez les ingrédients";
         alert.buttons = [{
             text: 'Envoyer',
             handler: (value) => { createPizza(nom, base , value)}
         }];
-        alert.inputs = createInput();
+        alert.inputs = createInput(ingredients, 'checkbox');
       }
     }
   
@@ -97,11 +85,11 @@ function onDeviceReady() {
    * créer le tableau d'inputs en fonction de la valeur de la constante ingrédients pour libérer du code
    * @returns {array}
    */
-  function createInput() {
+  function createInput(array, input) {
     let inputs = [];
-    ingredients.forEach((element)=>{
+    array.forEach((element)=>{
       inputs.push({
-        type: 'checkbox',
+        type: input,
         label : element,
         name : element,
         value : element
