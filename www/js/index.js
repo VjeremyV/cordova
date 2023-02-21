@@ -3,7 +3,7 @@ document.addEventListener("deviceready", onDeviceReady);
 function onDeviceReady() {
   const pizzasTag = document.querySelector("#pizzas-list");
   const btCreatePizza = document.querySelector("#bt-create-pizza");
-
+  const ingredients = ['fromage', "tomate","oignons","poulet","origan","oeuf","jambon"]
   btCreatePizza.addEventListener("click", () => {
     presentAlert();
   });
@@ -41,27 +41,7 @@ function onDeviceReady() {
           text: 'Envoyer',
           handler: (value) => { createPizza(nom, value)}
       }];
-      alert.inputs = [
-        {
-          type: 'checkbox',
-          label : "fromage",
-          name : "fromage",
-          value : "fromage"
-        },
-        {
-          type: 'checkbox',
-          label : "tomate",
-          name : "tomate",
-          value : "tomate"
-        },
-        {
-          type: 'checkbox',
-          label : "oignons",
-          name : "oignons",
-          value : "oignons"
-        },
-     
-      ];
+      alert.inputs = createInput();
     }
   
 
@@ -89,8 +69,17 @@ function onDeviceReady() {
     pizzasTag.insertBefore(ionItem, pizzasTag.firstElementChild);
   }
 
-  function resetInput(input) {
-    input.value = "";
+  function createInput() {
+    let inputs = [];
+    ingredients.forEach((element)=>{
+      inputs.push({
+        type: 'checkbox',
+        label : element,
+        name : element,
+        value : element
+      })
+    })
+    return inputs
   }
   function isValid(value) {
     return value && value.length > 2 && value.length < 50;
