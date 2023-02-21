@@ -1,10 +1,11 @@
+import {createPizza, createInput, isValid, formatIngredients, capitalizeFisrtLetter} from './function.js'
 document.addEventListener("deviceready", onDeviceReady);
+const pizzasTag = document.querySelector("#pizzas-list");
+const btCreatePizza = document.querySelector("#bt-create-pizza");
+const ingredients = ['fromage', "tomate","oignons","poulet","origan","oeuf","jambon"];
+const bases = ['base tomate', "base creme"];
 
 function onDeviceReady() {
-  const pizzasTag = document.querySelector("#pizzas-list");
-  const btCreatePizza = document.querySelector("#bt-create-pizza");
-  const ingredients = ['fromage', "tomate","oignons","poulet","origan","oeuf","jambon"];
-  const bases = ['base tomate', "base creme"];
 
   btCreatePizza.addEventListener("click", () => {
     presentAlert();
@@ -49,62 +50,14 @@ function onDeviceReady() {
         alert.header = "Renseignez les ingrédients";
         alert.buttons = [{
             text: 'Envoyer',
-            handler: (value) => { createPizza(nom, base , value)}
+            handler: (value) => { createPizza(nom, base, value, pizzasTag)}
         }];
         alert.inputs = createInput(ingredients, 'checkbox');
       }
     }
-  
-
     document.body.appendChild(alert);
     await alert.present();
-    
   }
 
-  /**
-   * créer un affichage pour une pizza à partir des resultats de l'alert
-   * @param {object} pizzaObject 
-   */
-  function createPizza(name, base, ingredients) {
-    console.log(base)
-    console.log(ingredients)
-    ingredients = ingredients.join(" ")
-    const ionItem = document.createElement("ion-item");
-    ionItem.innerHTML = `
-    <ion-label>
-    <h1>${capitalizeFisrtLetter(name)}</h1>
-    <h3>${capitalizeFisrtLetter(base)}</h3>
-    <h3>${formatIngredients(ingredients)}</h3>
-
-    </ion-label>
-    `;
-    pizzasTag.insertBefore(ionItem, pizzasTag.firstElementChild);
-  }
-
-  /**
-   * créer le tableau d'inputs en fonction de la valeur de la constante ingrédients pour libérer du code
-   * @returns {array}
-   */
-  function createInput(array, input) {
-    let inputs = [];
-    array.forEach((element)=>{
-      inputs.push({
-        type: input,
-        label : element,
-        name : element,
-        value : element
-      })
-    })
-    return inputs
-  }
-  function isValid(value) {
-    return value && value.length > 2 && value.length < 50;
-  }
-
-  function formatIngredients(value) {
-    return "(" + value.trim().replaceAll(" ", ", ") + ")";
-  }
-  function capitalizeFisrtLetter(value) {
-    return value.trim().slice(0, 1).toUpperCase() + value.trim().slice(1);
-  }
+ 
 }
