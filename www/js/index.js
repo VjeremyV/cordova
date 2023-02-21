@@ -38,7 +38,7 @@ function onDeviceReady() {
     } else {
       alert.header = "Renseignez les ingrédients";
       alert.buttons = [{
-          text: 'Créer',
+          text: 'Envoyer',
           handler: (value) => { createPizza(nom, value)}
       }];
       alert.inputs = [
