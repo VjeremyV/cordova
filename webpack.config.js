@@ -1,11 +1,10 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const options = {
   mode: process.env.NODE_ENV,
   entry: __dirname + "/src/index.ts",
   output: {
-    path: __dirname + "/dist/",
-    filename: "main.bundle.js",
+    path: __dirname + "/www/js/",
+    filename: "App.js",
   },
   module: {
     rules: [
@@ -26,7 +25,6 @@ const options = {
       }
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: __dirname + "/src/index.html" })],
   devServer: {
     open: true,
     watchFiles: ['./src**/*']

@@ -1,10 +1,9 @@
-import "./style.scss";
-import Carre from './Carre';
+import './style.scss';
+import Menu from './classes/Menu'
+document.addEventListener('deviceready', onDeviceReady, false);
 
-document.body.addEventListener("click", () => {
-  let carre= new Carre();
-  document.body.appendChild(carre.createSquare());
-});
-
-
-
+function onDeviceReady() {
+    let newMenu = new Menu();
+    newMenu.menuViewConstruct();
+  
+}
