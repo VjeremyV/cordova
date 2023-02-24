@@ -63,6 +63,8 @@ export default class Menu {
           element["content"];
         document.getElementById("page-title").innerHTML = element["name"];
         this.WhatPageForm(element["name"]);
+
+        (document.querySelector('ion-menu') as any).toggle()
       });
     });
   }
